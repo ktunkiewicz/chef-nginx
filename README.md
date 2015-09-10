@@ -63,6 +63,7 @@ Attribute Parameters (only used with the `create` action):
 * `index` - the [index](http://nginx.org/en/docs/http/ngx_http_index_module.html) files, in order of use, defaults to 'index.html index.htm'
 * `location` - basic [location](http://nginx.org/en/docs/http/ngx_http_core_module.html#location) block configuration, defaults to 'try_files $uri $uri/'
 * `phpfpm` - inserts a basic php fpm handler for .php files if true, defaults to false
+* `hhvm` - inserts a basic TCP/IP based php handler for .php files if true, defaults to false (cannot use if `phpfpm` is used).
 * `access_log` - enable or disable the access log, defaults to true
 * `custom_data` - hash of extra data for any custom things you might throw into your override template, defaults to an empty hash
 * `template_cookbook` - allows you to override the template used with your own. Set this to your cookbook name and create a template named 'site.erb', defaults to 'nginx'
@@ -107,6 +108,10 @@ end
 ```
 
 This would create a php-fpm enabled virtual host (provided you have php-fpm installed) with a default rewrite to index.php and enable it
+
+You can use `hhvm` mode of handling PHP file which will pass the file to a PHP interpreter listnening on 127.0.0.1:9000.
+This mode also enables `fastcgi_keep_conn`. To use this mode use `hhvm true` instead of `phpfpm true`.
+
 
 ```ruby
 my_data = { 'env' => 'production' }

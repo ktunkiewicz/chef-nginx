@@ -24,6 +24,7 @@ action :create do
       index: new_resource.index,
       location: new_resource.location,
       phpfpm: new_resource.phpfpm,
+      hhvm: new_resource.hhvm,
       access_log: new_resource.access_log,
       custom_data: new_resource.custom_data
     )
